@@ -14,299 +14,207 @@ export function HomePage() {
     <div className="overflow-hidden">
       <HeroSection />
 
-      {/* Core Value Proposition - Circuit Board Theme */}
-      <section className="relative py-40 overflow-hidden bg-[#0a0e1a]">
-        {/* Tech circuit grid background */}
+      {/* Core Value Proposition - Galaxy Theme */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background Image */}
         <div className="absolute inset-0">
-          {/* Base gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0a0e1a] via-[#0d1525] to-[#0a0e1a]" />
-          
-          {/* Animated circuit lines */}
-          <svg className="absolute inset-0 w-full h-full opacity-20">
-            {/* Horizontal lines */}
-            {[...Array(6)].map((_, i) => (
-              <motion.line
-                key={`h-${i}`}
-                x1="0"
-                y1={`${(i + 1) * 16.666}%`}
-                x2="100%"
-                y2={`${(i + 1) * 16.666}%`}
-                stroke="#0071e3"
-                strokeWidth="1"
-                strokeDasharray="10,5"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 2, delay: i * 0.2, repeat: Infinity, repeatDelay: 5 }}
-              />
-            ))}
-            {/* Vertical lines */}
-            {[...Array(6)].map((_, i) => (
-              <motion.line
-                key={`v-${i}`}
-                x1={`${(i + 1) * 16.666}%`}
-                y1="0"
-                x2={`${(i + 1) * 16.666}%`}
-                y2="100%"
-                stroke="#0071e3"
-                strokeWidth="1"
-                strokeDasharray="10,5"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 2.5, delay: i * 0.15, repeat: Infinity, repeatDelay: 5 }}
-              />
-            ))}
-          </svg>
+          <ImageWithFallback
+            src="https://images.unsplash.com/photo-1709408635158-8d735f0395c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZWVwJTIwc3BhY2UlMjBnYWxheHklMjBuZWJ1bGF8ZW58MXx8fHwxNzY0NjQ1ODEwfDA&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Deep Space Galaxy"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60" />
+        </div>
 
-          {/* Circuit nodes */}
-          {[...Array(15)].map((_, i) => (
+        {/* Floating particles */}
+        <div className="absolute inset-0 opacity-40">
+          {[...Array(50)].map((_, i) => (
             <motion.div
-              key={`node-${i}`}
-              className="absolute w-3 h-3 rounded-full bg-primary"
+              key={i}
+              className="absolute w-1 h-1 bg-white rounded-full"
               style={{
-                left: `${10 + (i * 6.5)}%`,
-                top: `${20 + ((i * 7) % 60)}%`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
               }}
               animate={{
-                opacity: [0.3, 1, 0.3],
-                scale: [1, 1.5, 1],
+                opacity: [0, 1, 0],
+                scale: [0.5, 1.5, 0.5],
               }}
               transition={{
-                duration: 3,
+                duration: 3 + Math.random() * 4,
                 repeat: Infinity,
-                delay: i * 0.3,
-              }}
-            />
-          ))}
-
-          {/* Glowing tech overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-transparent via-primary/5 to-transparent" />
-        </div>
-        
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl mb-8 max-w-4xl mx-auto text-white">
-              When the unexpected happens,
-              <span className="block mt-2 bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">
-                our AI responds
-              </span>
-            </h2>
-            <p className="text-xl sm:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              We develop advanced large language models that understand context and reason through novel situations.
-            </p>
-          </motion.div>
-
-          {/* Technology Pillars */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              { 
-                icon: Brain, 
-                label: 'LLM Deep Reasoning',
-                description: 'Advanced language models that understand context and reason through novel situations'
-              },
-              { 
-                icon: Shield, 
-                label: 'Formal Methods',
-                description: 'Mathematically proven safety guarantees for mission-critical decisions'
-              },
-              { 
-                icon: Zap, 
-                label: 'Bayesian Inference',
-                description: 'Probabilistic reasoning under uncertainty with real-time adaptation'
-              }
-            ].map((tech, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15, duration: 0.6 }}
-                className="relative group"
-              >
-                <div className="relative p-8 rounded-2xl border border-primary/30 bg-[#0d1525]/80 backdrop-blur-sm transition-all duration-300 hover:border-primary/60 hover:shadow-xl hover:shadow-primary/20">
-                  <tech.icon className="h-12 w-12 text-primary mb-4" />
-                  <h3 className="text-xl mb-3 text-white">{tech.label}</h3>
-                  <p className="text-sm text-gray-300 leading-relaxed">{tech.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* NASA Partnership - Deep Space Theme */}
-      <section className="relative py-40 overflow-hidden bg-[#000000]">
-        {/* Space-themed animated background */}
-        <div className="absolute inset-0">
-          {/* Deep space gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#000814] via-[#001d3d] to-[#000814]"/>
-          
-          {/* Animated stars */}
-          <div className="absolute inset-0">
-            {[...Array(100)].map((_, i) => {
-              const size = Math.random() * 2 + 1;
-              const left = Math.random() * 100;
-              const top = Math.random() * 100;
-              const duration = Math.random() * 3 + 2;
-              const delay = Math.random() * 2;
-              
-              return (
-                <motion.div
-                  key={`star-${i}`}
-                  className="absolute rounded-full bg-white"
-                  style={{
-                    width: size,
-                    height: size,
-                    left: `${left}%`,
-                    top: `${top}%`,
-                  }}
-                  animate={{
-                    opacity: [0.2, 1, 0.2],
-                    scale: [1, 1.5, 1],
-                  }}
-                  transition={{
-                    duration,
-                    delay,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              );
-            })}
-          </div>
-
-          {/* Orbital paths */}
-          <svg className="absolute inset-0 w-full h-full opacity-20">
-            <motion.ellipse
-              cx="50%"
-              cy="50%"
-              rx="45%"
-              ry="30%"
-              stroke="#0071e3"
-              strokeWidth="1"
-              fill="none"
-              strokeDasharray="5,5"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 2, ease: "easeInOut" }}
-            />
-            <motion.ellipse
-              cx="50%"
-              cy="50%"
-              rx="35%"
-              ry="20%"
-              stroke="#4dabf7"
-              strokeWidth="1"
-              fill="none"
-              strokeDasharray="3,3"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 2.5, ease: "easeInOut", delay: 0.3 }}
-            />
-          </svg>
-
-          {/* Floating satellites */}
-          {[...Array(3)].map((_, i) => (
-            <motion.div
-              key={`satellite-${i}`}
-              className="absolute"
-              style={{
-                left: `${20 + i * 30}%`,
-                top: `${30 + i * 15}%`,
-              }}
-              animate={{
-                x: [0, 30, 0],
-                y: [0, -20, 0],
-              }}
-              transition={{
-                duration: 8 + i * 2,
-                repeat: Infinity,
+                delay: Math.random() * 5,
                 ease: "easeInOut",
               }}
-            >
-              <Satellite className="w-6 h-6 text-primary/60" />
-            </motion.div>
+            />
           ))}
-
-          {/* Glowing nebula effect */}
-          <motion.div
-            className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full"
-            style={{
-              background: 'radial-gradient(circle, rgba(0, 113, 227, 0.15) 0%, transparent 70%)',
-              filter: 'blur(60px)',
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-
-          <motion.div
-            className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] rounded-full"
-            style={{
-              background: 'radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 70%)',
-              filter: 'blur(60px)',
-            }}
-            animate={{
-              scale: [1, 1.3, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-
-          {/* Gradient overlay for content readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/70 to-transparent" />
         </div>
-
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <div className="max-w-4xl">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              {/* NASA Logo and Title */}
-              <div className="flex items-center gap-6 mb-8">
-                <motion.img 
-                  src={nasaLogo} 
-                  alt="NASA" 
-                  className="h-16 sm:h-20"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  style={{
-                    filter: 'drop-shadow(0 4px 12px rgba(0,0,0,0.3))'
-                  }}
-                />
-                <h2 className="text-5xl sm:text-6xl lg:text-7xl text-white">
-                  Developed for
-                  <span className="block mt-2 bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">
-                    manned NASA Deep Space Missions
-                  </span>
-                </h2>
-              </div>
-              
-              <p className="text-xl text-gray-300 mb-6 leading-relaxed">
-                AFFEKTA is building autonomous decision-making systems for NASA's deep space missions 
-                under STTR Phase I grant <span className="text-primary">T6.09-1000</span>.
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl mb-10 text-white leading-tight">
+                When the unexpected happens,
+                <span className="block mt-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  our AI responds
+                </span>
+              </h2>
+              <p className="text-2xl sm:text-3xl text-white/90 mb-16 leading-relaxed max-w-3xl">
+                We develop advanced large language models that understand context and reason through novel situations.
               </p>
-              <p className="text-lg text-gray-200 mb-10 leading-relaxed">
+            </motion.div>
+
+            {/* Technology Pillars - Horizontal Cards */}
+            <div className="grid md:grid-cols-3 gap-6 mt-16">
+              {[
+                { 
+                  icon: Brain, 
+                  label: 'LLM Deep Reasoning',
+                  description: 'Advanced language models that understand context and reason through novel situations'
+                },
+                { 
+                  icon: Shield, 
+                  label: 'Formal Methods',
+                  description: 'Mathematically proven safety guarantees for mission-critical decisions'
+                },
+                { 
+                  icon: Zap, 
+                  label: 'Bayesian Inference',
+                  description: 'Probabilistic reasoning under uncertainty with real-time adaptation'
+                }
+              ].map((tech, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15 + 0.4, duration: 0.6 }}
+                  className="group relative"
+                >
+                  <div className="relative p-8 rounded-2xl border border-white/20 bg-white/5 backdrop-blur-md transition-all duration-300 hover:border-cyan-400/60 hover:bg-white/10 hover:shadow-2xl hover:shadow-cyan-400/20">
+                    <tech.icon className="h-14 w-14 text-cyan-400 mb-5" />
+                    <h3 className="text-2xl mb-4 text-white">{tech.label}</h3>
+                    <p className="text-base text-white/80 leading-relaxed">{tech.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+      </section>
+
+      {/* NASA Partnership - Spacecraft Theme */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <ImageWithFallback
+            src="https://images.unsplash.com/photo-1602266624233-233f99b9de36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuYXNhJTIwc3BhY2VjcmFmdCUyMG1pc3Npb258ZW58MXx8fHwxNzY0NjQ1ODEwfDA&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="NASA Spacecraft"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+        </div>
+
+        {/* Animated overlay elements */}
+        <div className="absolute inset-0">
+          {/* Orbital rings */}
+          <svg className="absolute inset-0 w-full h-full opacity-20">
+            <motion.circle
+              cx="80%"
+              cy="50%"
+              r="300"
+              stroke="#0ea5e9"
+              strokeWidth="1"
+              fill="none"
+              strokeDasharray="5,5"
+              initial={{ pathLength: 0, rotate: 0 }}
+              animate={{ pathLength: 1, rotate: 360 }}
+              transition={{ pathLength: { duration: 2 }, rotate: { duration: 60, repeat: Infinity, ease: "linear" }}}
+            />
+            <motion.circle
+              cx="80%"
+              cy="50%"
+              r="400"
+              stroke="#06b6d4"
+              strokeWidth="1"
+              fill="none"
+              strokeDasharray="3,3"
+              initial={{ pathLength: 0, rotate: 0 }}
+              animate={{ pathLength: 1, rotate: -360 }}
+              transition={{ pathLength: { duration: 2.5, delay: 0.3 }, rotate: { duration: 80, repeat: Infinity, ease: "linear" }}}
+            />
+          </svg>
+
+          {/* Floating satellites */}
+          {[...Array(4)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute"
+              style={{
+                left: `${60 + i * 8}%`,
+                top: `${20 + i * 15}%`,
+              }}
+              animate={{
+                x: [0, 40, 0],
+                y: [0, -30, 0],
+                rotate: [0, 180, 360],
+              }}
+              transition={{
+                duration: 12 + i * 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <Satellite className="w-8 h-8 text-cyan-400/40" />
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              {/* NASA Logo */}
+              <motion.img 
+                src={nasaLogo} 
+                alt="NASA" 
+                className="h-20 sm:h-24 mb-8"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                style={{
+                  filter: 'drop-shadow(0 4px 20px rgba(0,0,0,0.5))'
+                }}
+              />
+
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl mb-8 text-white leading-tight">
+                Developed for
+                <span className="block mt-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  manned NASA Deep Space Missions
+                </span>
+              </h2>
+              
+              <p className="text-xl sm:text-2xl text-white/90 mb-6 leading-relaxed">
+                AFFEKTA is building autonomous decision-making systems for NASA's deep space missions 
+                under STTR Phase I grant <span className="text-cyan-400 font-[Newsreader]">T6.09-1000</span>.
+              </p>
+              <p className="text-lg sm:text-xl text-white/80 mb-10 leading-relaxed">
                 Our technology enables life-critical habitats to operate independently when 
                 Earth-based expert support is unavailable—a challenge that becomes reality 
                 as humans venture deeper into space.
@@ -314,154 +222,121 @@ export function HomePage() {
               <Button
                 size="lg"
                 onClick={() => navigate('/about')}
-                className="text-lg px-8 py-6 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all"
+                className="text-lg px-10 py-7 bg-cyan-500 hover:bg-cyan-400 text-black shadow-2xl shadow-cyan-500/40 hover:shadow-cyan-400/50 transition-all"
               >
                 Our NASA Partnership
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </motion.div>
-          </div>
 
-          {/* I-Corps Badge - Lower Right Corner */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="absolute bottom-8 right-8 flex flex-col items-end gap-3"
-          >
-            {/* Trusted Partner Button */}
-            <Button
-              onClick={() => navigate('/icorps')}
-              variant="outline"
-              className="group px-6 py-3 border-primary/30 bg-primary/10 hover:bg-primary/20 hover:border-primary/50 transition-all duration-300 backdrop-blur-sm"
+            {/* Right - I-Corps Badge */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="flex flex-col items-center lg:items-end gap-6"
             >
-              <span className="text-primary text-sm">Trusted Partner</span>
-              <ArrowRight className="ml-2 h-4 w-4 text-primary group-hover:translate-x-1 transition-transform" />
-            </Button>
+              {/* Trusted Partner Label */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20"
+              >
+                <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                <span className="text-white text-sm uppercase tracking-wider">
+                  Trusted Partner
+                </span>
+              </motion.div>
 
-            {/* I-Corps Logo */}
-            <motion.button
-              onClick={() => navigate('/icorps')}
-              className="group relative px-6 py-4 rounded-2xl border-2 border-primary/40 bg-gradient-to-br from-primary/20 to-purple-500/20 backdrop-blur-sm hover:border-primary/60 hover:from-primary/30 hover:to-purple-500/30 transition-all duration-300 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <img 
-                src={iCorpsLogo} 
-                alt="NSF I-Corps - Selected 2025" 
-                className="h-12 w-auto"
-                style={{
-                  mixBlendMode: 'screen',
-                  filter: 'brightness(1.1) contrast(1.1)'
-                }}
-              />
-              
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-purple-500/0 group-hover:from-primary/10 group-hover:to-purple-500/10 transition-all duration-300" />
-            </motion.button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Industries Overview - Data Mesh Theme */}
-      <section className="relative py-40 overflow-hidden bg-[#0f1419]">
-        {/* Animated mesh background */}
-        <div className="absolute inset-0">
-          {/* Base gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0f1419] via-[#1a1f2e] to-[#0f1419]" />
-          
-          {/* Animated data points mesh */}
-          <svg className="absolute inset-0 w-full h-full opacity-15">
-            {/* Create mesh lines */}
-            {[...Array(8)].map((_, row) => 
-              [...Array(12)].map((_, col) => {
-                const x = (col + 1) * 8.333;
-                const y = (row + 1) * 12.5;
-                return (
-                  <motion.circle
-                    key={`mesh-${row}-${col}`}
-                    cx={`${x}%`}
-                    cy={`${y}%`}
-                    r="2"
-                    fill="#0071e3"
-                    animate={{
-                      opacity: [0.2, 0.8, 0.2],
-                      r: [2, 3, 2],
-                    }}
-                    transition={{
-                      duration: 2 + Math.random() * 2,
-                      repeat: Infinity,
-                      delay: (row + col) * 0.1,
-                    }}
-                  />
-                );
-              })
-            )}
-            {/* Connection lines */}
-            {[...Array(20)].map((_, i) => {
-              const x1 = Math.random() * 100;
-              const y1 = Math.random() * 100;
-              const x2 = Math.random() * 100;
-              const y2 = Math.random() * 100;
-              return (
-                <motion.line
-                  key={`conn-${i}`}
-                  x1={`${x1}%`}
-                  y1={`${y1}%`}
-                  x2={`${x2}%`}
-                  y2={`${y2}%`}
-                  stroke="#0071e3"
-                  strokeWidth="0.5"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ 
-                    pathLength: [0, 1, 0],
-                    opacity: [0, 0.3, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    delay: i * 0.2,
+              {/* I-Corps Logo Card */}
+              <motion.button
+                onClick={() => navigate('/icorps')}
+                className="group relative px-10 py-8 rounded-3xl border-2 border-purple-500/40 bg-gradient-to-br from-purple-500/20 to-blue-500/20 backdrop-blur-md hover:border-purple-400/60 hover:from-purple-500/30 hover:to-blue-500/30 transition-all duration-300 shadow-2xl shadow-purple-500/30 hover:shadow-purple-400/40"
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <img 
+                  src={iCorpsLogo} 
+                  alt="NSF I-Corps - Selected 2025" 
+                  className="h-20 w-auto"
+                  style={{
+                    mixBlendMode: 'screen',
+                    filter: 'brightness(1.2) contrast(1.1)'
                   }}
                 />
-              );
-            })}
-          </svg>
+                
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/0 to-blue-500/0 group-hover:from-purple-400/20 group-hover:to-blue-400/20 transition-all duration-300" />
+              </motion.button>
 
-          {/* Rotating gradient orb */}
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full"
-            style={{
-              background: 'radial-gradient(circle, rgba(0, 113, 227, 0.15) 0%, transparent 70%)',
-              filter: 'blur(80px)',
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
+              <Button
+                onClick={() => navigate('/icorps')}
+                variant="outline"
+                className="group px-6 py-3 border-purple-400/40 bg-purple-500/10 hover:bg-purple-500/20 hover:border-purple-400/60 text-white transition-all duration-300 backdrop-blur-sm"
+              >
+                <span className="text-purple-300">Learn More</span>
+                <ArrowRight className="ml-2 h-4 w-4 text-purple-300 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </motion.div>
+          </div>
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+      </section>
+
+      {/* Industries Overview - Earth from Space Theme */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <ImageWithFallback
+            src="https://images.unsplash.com/photo-1693654999662-27eabff1737c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlYXJ0aCUyMGZyb20lMjBzcGFjZSUyMGJsdWV8ZW58MXx8fHwxNzY0NjQ1ODExfDA&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Earth from Space"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
+        </div>
+
+        {/* Animated data mesh overlay */}
+        <div className="absolute inset-0 opacity-20">
+          <svg className="absolute inset-0 w-full h-full">
+            {[...Array(6)].map((_, i) => (
+              <motion.circle
+                key={i}
+                cx={`${20 + i * 12}%`}
+                cy="50%"
+                r="4"
+                fill="#0ea5e9"
+                animate={{
+                  opacity: [0.2, 1, 0.2],
+                  r: [4, 6, 4],
+                }}
+                transition={{
+                  duration: 2 + i * 0.3,
+                  repeat: Infinity,
+                  delay: i * 0.2,
+                }}
+              />
+            ))}
+          </svg>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="mb-20 max-w-4xl"
           >
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl mb-8 text-white">
+            <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl mb-10 text-white leading-tight">
               Safety-critical systems
-              <span className="block mt-2 bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">
+              <span className="block mt-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 across industries
               </span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-2xl sm:text-3xl text-white/90">
               When unforeseen events pose system risk
             </p>
           </motion.div>
@@ -470,19 +345,19 @@ export function HomePage() {
             {[
               { 
                 label: 'Aerospace',
-                image: 'https://images.unsplash.com/photo-1646073981029-960badede3f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZXJvc3BhY2UlMjBhaXJjcmFmdCUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzYxODkxNjcxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+                image: 'https://images.unsplash.com/photo-1646073981029-960badede3f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhZXJvc3BhY2UlMjBhaXJjcmFmdCUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzYxODkxNjcxfDA&ixlib=rb-4.1.0&q=80&w=1080'
               },
               { 
                 label: 'Oil & Gas',
-                image: 'https://images.unsplash.com/photo-1600221574280-9bcd5d108100?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvaWwlMjBnYXMlMjBwbGF0Zm9ybXxlbnwxfHx8fDE3NjE4OTE2NzF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+                image: 'https://images.unsplash.com/photo-1600221574280-9bcd5d108100?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvaWwlMjBnYXMlMjBwbGF0Zm9ybXxlbnwxfHx8fDE3NjE4OTE2NzF8MA&ixlib=rb-4.1.0&q=80&w=1080'
               },
               { 
                 label: 'Healthcare',
-                image: 'https://images.unsplash.com/photo-1758691463110-697a814b2033?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwbWVkaWNhbCUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzYxNzg3ODgzfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+                image: 'https://images.unsplash.com/photo-1758691463110-697a814b2033?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGhjYXJlJTIwbWVkaWNhbCUyMHRlY2hub2xvZ3l8ZW58MXx8fHwxNzYxNzg3ODgzfDA&ixlib=rb-4.1.0&q=80&w=1080'
               },
               { 
                 label: 'Infrastructure',
-                image: 'https://images.unsplash.com/photo-1725781535657-29d825bc7824?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmZyYXN0cnVjdHVyZSUyMG1hbnVmYWN0dXJpbmclMjBmYWNpbGl0eXxlbnwxfHx8fDE3NjE4OTE2NzJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+                image: 'https://images.unsplash.com/photo-1725781535657-29d825bc7824?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbmZyYXN0cnVjdHVyZSUyMG1hbnVmYWN0dXJpbmclMjBmYWNpbGl0eXxlbnwxfHx8fDE3NjE4OTE2NzJ8MA&ixlib=rb-4.1.0&q=80&w=1080'
               }
             ].map((industry, i) => (
               <motion.div
@@ -493,22 +368,18 @@ export function HomePage() {
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 className="group relative overflow-hidden rounded-2xl aspect-[4/3]"
               >
-                {/* Background Image */}
                 <ImageWithFallback
                   src={industry.image}
                   alt={industry.label}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 
-                {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 transition-opacity duration-300 group-hover:from-black/80 group-hover:via-black/40" />
                 
-                {/* Border & Glow Effect */}
-                <div className="absolute inset-0 border border-primary/30 rounded-2xl transition-all duration-300 group-hover:border-primary/60 group-hover:shadow-xl group-hover:shadow-primary/20" />
+                <div className="absolute inset-0 border-2 border-cyan-400/0 rounded-2xl transition-all duration-300 group-hover:border-cyan-400/60 group-hover:shadow-2xl group-hover:shadow-cyan-400/30" />
                 
-                {/* Content */}
                 <div className="relative h-full flex items-end p-6">
-                  <h3 className="text-2xl text-white transition-transform duration-300 group-hover:translate-y-[-4px]">
+                  <h3 className="text-2xl sm:text-3xl text-white transition-transform duration-300 group-hover:translate-y-[-4px]">
                     {industry.label}
                   </h3>
                 </div>
@@ -516,41 +387,42 @@ export function HomePage() {
             ))}
           </div>
 
-          <div className="text-center">
+          <div className="flex justify-start">
             <Button
               size="lg"
               onClick={() => navigate('/industries')}
               variant="outline"
-              className="text-lg px-8 py-6 border-primary/40 text-white hover:border-primary/60 hover:bg-primary/10 transition-all"
+              className="text-lg px-10 py-7 border-cyan-400/40 text-white hover:border-cyan-400/80 hover:bg-cyan-400/10 transition-all"
             >
               Explore All Industries
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </div>
+
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
       </section>
 
-      {/* Final CTA - Quantum Grid Theme */}
-      <section className="relative py-40 overflow-hidden bg-[#08090d]">
-        {/* Quantum-inspired grid */}
+      {/* Final CTA - Rocket Launch Theme */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background Image */}
         <div className="absolute inset-0">
-          {/* Base gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#08090d] via-[#0d0f17] to-[#08090d]" />
-          
-          {/* Glowing grid */}
-          <div className="absolute inset-0 opacity-30" style={{
-            backgroundImage: `
-              linear-gradient(rgba(0, 113, 227, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 113, 227, 0.1) 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 60px',
-          }} />
+          <ImageWithFallback
+            src="https://images.unsplash.com/photo-1720214658819-2676e74b4c69?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb2NrZXQlMjBsYXVuY2glMjBzcGFjZXxlbnwxfHx8fDE3NjQ2Mjc0MTV8MA&ixlib=rb-4.1.0&q=80&w=1080"
+            alt="Rocket Launch"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/40" />
+        </div>
 
-          {/* Quantum particles */}
-          {[...Array(25)].map((_, i) => (
+        {/* Quantum particles effect */}
+        <div className="absolute inset-0 opacity-30">
+          {[...Array(30)].map((_, i) => (
             <motion.div
-              key={`quantum-${i}`}
-              className="absolute w-1 h-1 bg-primary rounded-full"
+              key={i}
+              className="absolute w-1 h-1 bg-cyan-400 rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
@@ -558,89 +430,55 @@ export function HomePage() {
               animate={{
                 scale: [1, 2, 1],
                 opacity: [0.3, 1, 0.3],
-                x: [0, Math.random() * 100 - 50, 0],
-                y: [0, Math.random() * 100 - 50, 0],
+                y: [0, -100, 0],
               }}
               transition={{
                 duration: 5 + Math.random() * 5,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: Math.random() * 3,
               }}
             />
           ))}
-
-          {/* Floating gradient orbs */}
-          <motion.div
-            className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full"
-            style={{
-              background: 'radial-gradient(circle, rgba(0, 113, 227, 0.2) 0%, transparent 70%)',
-              filter: 'blur(80px)',
-            }}
-            animate={{
-              x: [0, 100, 0],
-              y: [0, -50, 0],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          
-          <motion.div
-            className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full"
-            style={{
-              background: 'radial-gradient(circle, rgba(147, 51, 234, 0.2) 0%, transparent 70%)',
-              filter: 'blur(80px)',
-            }}
-            animate={{
-              x: [0, -100, 0],
-              y: [0, 50, 0],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
         </div>
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl mb-10 text-white">
-              Ready to master the
-              <span className="block mt-2 bg-gradient-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent">
-                unpredictable?
-              </span>
-            </h2>
-            <p className="text-xl text-gray-300 mb-14 max-w-2xl mx-auto leading-relaxed">
-              Join NASA and forward-thinking organizations deploying AI systems 
-              that turn uncertainty into opportunity.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                onClick={() => navigate('/engagement')}
-                className="text-lg px-10 py-7 shadow-2xl shadow-primary/30 hover:shadow-primary/40 transition-all"
-              >
-                Start a Conversation
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={() => navigate('/technology')}
-                className="text-lg px-10 py-7 border-primary/40 text-white hover:border-primary/60 hover:bg-primary/10 transition-all"
-              >
-                Explore Technology
-              </Button>
-            </div>
-          </motion.div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl mb-10 text-white leading-tight">
+                Ready to master the
+                <span className="block mt-4 bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  unpredictable?
+                </span>
+              </h2>
+              <p className="text-xl sm:text-2xl text-white/90 mb-14 max-w-3xl mx-auto leading-relaxed">
+                Join NASA and forward-thinking organizations deploying AI systems 
+                that turn uncertainty into opportunity.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+                <Button
+                  size="lg"
+                  onClick={() => navigate('/contact')}
+                  className="text-lg px-12 py-8 bg-cyan-500 hover:bg-cyan-400 text-black shadow-2xl shadow-cyan-500/50 hover:shadow-cyan-400/60 transition-all"
+                >
+                  Start a Conversation
+                  <ArrowRight className="ml-2 h-6 w-6" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => navigate('/technology')}
+                  className="text-lg px-12 py-8 border-cyan-400/40 text-white hover:border-cyan-400/80 hover:bg-cyan-400/10 transition-all"
+                >
+                  Explore Technology
+                </Button>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>
